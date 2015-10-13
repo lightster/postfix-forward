@@ -3,6 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
+use Symfony\Component\Console\Input\InputArgument;
 
 class MailForward extends Command
 {
@@ -11,7 +12,7 @@ class MailForward extends Command
      *
      * @var string
      */
-    protected $signature = 'mail:forward';
+    protected $name = 'mail:forward';
 
     /**
      * The console command description.
@@ -38,5 +39,18 @@ class MailForward extends Command
     public function handle()
     {
         //
+    }
+
+    /**
+     * Get the console command arguments.
+     *
+     * @return array
+     */
+    protected function getArguments()
+    {
+        return [
+            ['alias', InputArgument::REQUIRED, 'The email pattern to match'],
+            ['destination', InputArgument::REQUIRED, 'The email address to forward to'],
+        ];
     }
 }
